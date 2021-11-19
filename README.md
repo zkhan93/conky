@@ -1,6 +1,12 @@
-for conky to work
-- copy .conkyrc files
-- set conky start with delay script to run on startup
-- install 2 fonts
-- set executables (bring all executables in one place)
+[Work in Progress]
+# Install
+ - clone this repo
+ - run `./install`
 
+# folder
+ - sidebar - contains clock and system info
+ - parcel - list current status of all parcels
+ - quotes - downloads quotes from github gist and shows a one randomly
+
+## Screenshot
+![](desktop.png)
