@@ -1,0 +1,114 @@
+conky.config = {
+--==============================================================================
+--                               conkyrc_orange
+--							http://www.NoobsLab.com
+--  author  : SLK
+--  version : v2011011601
+--  license : Distributed under the terms of GNU GPL version 2 or later
+--  default color orange E F 5 A 2 9, replace 2 4 2 5 2 A with this to set back to default
+--  for GPU graph ${execigraph 2 "nvidia-smi | grep % | cut -c 61-63"}
+--==============================================================================
+
+	background = true,
+	update_interval = 2,
+
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	temperature_unit = 'celsius',
+
+	double_buffer = true,
+	no_buffers = true,
+	text_buffer_size = 2048,
+
+	gap_x = 10,
+	gap_y = 10,
+	minimum_width = 200,
+	minimum_height = 1024,
+	maximum_width = 200,
+	own_window = true,
+	own_window_type = 'normal',
+	own_window_argb_visual = true,
+	own_window_transparent = true,
+	own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
+	border_inner_margin = 0,
+	border_outer_margin = 10,
+	alignment = 'top_right',
+
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = true,
+
+	override_utf8_locale = true,
+	use_xft = true,
+	font = 'caviar dreams:size=8',
+	xftalpha = 0.5,
+	uppercase = false,
+
+	default_color = '#FFFFFF',
+	color1 = '#24252A',
+	color2 = '#242424',
+
+	lua_load = '~/.conky/sidebar/conky_orange.lua ~/.conky/sidebar/conky_basic.lua',
+	lua_draw_hook_post = 'main',
+
+	own_window_argb_value = 127,
+	own_window_colour = '#000000',
+	if_up_strictness = address,
+	default_graph_width = 200,
+	default_graph_height = 40,
+	default_bar_width = 200,
+	default_bar_height = 5
+};
+
+conky.text = [[
+${voffset 70}
+${goto 90}${color1}${font ubuntu:size=22:style=Bold}${time %e}
+${font ubuntu:size=9}${goto 80}${voffset -20}${color2}${font ubuntu:size=9}${time %b}${voffset 20} ${color2}${font ubuntu:size=12}${voffset -20}${time %Y}${font}
+${goto 87}${color1}${voffset -2}${font ubuntu:size=10:style=Bold}${time %A}
+
+${voffset 50}
+${alignc}${color1}${font Ubuntu:size=11:style=Bold}Network
+${alignc}${font Ubuntu:size=8:style=normal} $gw_iface
+${upspeedgraph wlan0 FFFFFF FFFFFF}
+${voffset -66}
+${downspeedgraph wlan0}
+${font ubuntu:size=8}Download${alignr}Upload
+${lua activeiface totaldown}${alignr}${lua activeiface totalup}
+${lua activeiface downspeed}${alignr}${lua activeiface upspeed}
+
+${alignc}${font Ubuntu:size=10:style=Bold}Memory
+${alignc}${font ubuntu:size=8}${memperc}% used of ${memmax}
+${memgraph}
+
+${alignc}${font Ubuntu:size=10:style=Bold}Disk
+${alignc}${font ubuntu:size=8}${fs_free} left of ${fs_size}
+${diskiograph}
+
+${alignc}${font Ubuntu:size=10:style=Bold}Processor
+${alignc}${font ubuntu:size=8}${execi 1000 cat /proc/cpuinfo | grep 'model name' | sed -e 's/model name.*: //'| uniq | cut -c 1-26}
+${alignc}${color2}${freq_g} GHz  |  ${cpu}%  |  ${acpitemp}°C
+${cpugraph}
+
+${alignc}${font Ubuntu:size=10:style=Bold}GPU
+${alignc}${font ubuntu:size=8}RTX 3060
+${alignc}${font ubuntu:size=8}${nvidia memfreq} / ${nvidia gpufreq} MHz  |  ${nvidia gpuutil}%  |  ${nvidia temp}°C
+
+${alignc}${color1}${font Ubuntu:size=10:style=Bold}Battery${font Ubuntu:size=8:style=normal}
+${alignc}${battery}
+${alignc}${battery_time}
+${alignc}${battery_bar}
+${alignc}${font Ubuntu:size=8:style=normal}uptime ${uptime_short}
+
+
+${alignc}${font Ubuntu:size=10:style=Bold}IP Address
+${font Ubuntu:size=8:style=normal}\
+${alignc}${curl www.icanhazip.com }\
+${alignc}${lua activeiface addr} / $gw_ip
+
+${voffset 5}
+${alignc}${font Biloxi Script:size=22}Zeeshan Khan
+${alignc}${color1}${font Ubuntu:size=12:style=Bold}${exec lsb_release -ds}
+]];
+
+

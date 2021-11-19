@@ -1,0 +1,2 @@
+#!/bin/sh
+/home/zeeshan/repos/stocks/venv/bin/python /home/zeeshan/.conky/stock/fetch_data.py
